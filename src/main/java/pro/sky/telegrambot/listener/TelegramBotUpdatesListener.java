@@ -8,6 +8,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.model.Notification_task;
 import pro.sky.telegrambot.repository.Notification_task_repository;
@@ -15,9 +16,11 @@ import pro.sky.telegrambot.repository.Notification_task_repository;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class TelegramBotUpdatesListener implements UpdatesListener {
@@ -67,6 +70,20 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
 
         });
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
+    }
+
+    @Scheduled(cron = "0 0/1 * * * *")
+    public void getListNotific() {
+        List<Notification_task> listNotif = notificationTaskRepository.findAll();
+        listNotif.stream()
+                .filter(not -> not.getDate_time().truncatedTo(ChronoUnit.MINUTES)
+                        .equals(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)))
+                .forEach(notif -> {
+                    Long chatId = notif.getChart_id();
+                    SendMessage sendMess = new SendMessage(chatId, notif.getMessage());
+                    SendResponse response = telegramBot.execute(sendMess);
+                });
+
     }
 
 }
