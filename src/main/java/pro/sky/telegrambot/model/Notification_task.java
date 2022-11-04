@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+// entity for storing information about messages sent in a chat
 @Entity
 public class Notification_task {
     @Id

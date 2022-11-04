@@ -11,6 +11,5 @@ import java.util.List;
 import static java.time.LocalDateTime.*;
 
 public interface Notification_task_repository extends JpaRepository<Notification_task, Long> {
-//    List<Notification_task> getNotification_tasksByDate_time(LocalDateTime localDateTime);
 
 }
