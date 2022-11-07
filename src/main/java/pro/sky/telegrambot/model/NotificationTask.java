@@ -8,34 +8,34 @@ import java.time.LocalDateTime;
 
 // entity for storing information about messages sent in a chat
 @Entity
-public class Notification_task {
+public class NotificationTask {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long chart_id;
+    private Long chartId;
     private String message;
-    private LocalDateTime date_time;
+    private LocalDateTime dateTime;
 
-    public Notification_task() {
+    public NotificationTask() {
     }
 
-    public Notification_task(Long id, Long chart_id, String message, LocalDateTime date_time) {
+    public NotificationTask(Long id, Long chartId, String message, LocalDateTime dateTime) {
         this.id = id;
-        this.chart_id = chart_id;
+        this.chartId = chartId;
         this.message = message;
-        this.date_time = date_time;
+        this.dateTime = dateTime;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Long getChart_id() {
-        return chart_id;
+    public Long getChartId() {
+        return chartId;
     }
 
-    public void setChart_id(Long chart_id) {
-        this.chart_id = chart_id;
+    public void setChart_id(Long chartId) {
+        this.chartId = chartId;
     }
 
     public String getMessage() {
@@ -46,12 +46,12 @@ public class Notification_task {
         this.message = message;
     }
 
-    public LocalDateTime getDate_time() {
-        return date_time;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate_time(LocalDateTime date_time) {
-        this.date_time = date_time;
+    public void setDate_time(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Notification_task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Notification_task that = (Notification_task) o;
+        NotificationTask that = (NotificationTask) o;
 
         return id.equals(that.id);
     }
