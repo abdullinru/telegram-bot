@@ -17,7 +17,6 @@ public class ShedulesComponent {
 
     private final TelegramBot telegramBot;
     private final NotificationTaskRepository notificationTaskRepository;
-//    private LocalDateTime ldt = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
     public ShedulesComponent(TelegramBot telegramBot,
                              NotificationTaskRepository notificationTaskRepository) {
@@ -33,6 +32,7 @@ public class ShedulesComponent {
     public void getListNotific() {
         LocalDateTime ldt = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
+        // get all notes for datetime
         List<NotificationTask> listNotif = notificationTaskRepository.findAllByDateTime(ldt);
         listNotif.stream()
                 .forEach(notif -> {
